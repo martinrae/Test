@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="serviceCategory">
+            <h2><span>Service Category</span> {{serviceCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{serviceCategory.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{serviceCategory.description}}</span>
+                </dd>
+                <dt><span>Profile Image</span></dt>
+                <dd>
+                    <div *ngIf="serviceCategory.profileImage">
+                        <a (click)="openFile(serviceCategory.profileImageContentType, serviceCategory.profileImage)">
+                            <img [src]="'data:' + serviceCategory.profileImageContentType + ';base64,' + serviceCategory.profileImage" style="max-width: 100%;" alt="serviceCategory image"/>
+                        </a>
+                        {{serviceCategory.profileImageContentType}}, {{byteSize(serviceCategory.profileImage)}}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/service-category', serviceCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

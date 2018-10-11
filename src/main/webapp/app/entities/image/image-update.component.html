@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-image-heading">Create or edit a Image</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!image.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="image.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateCreated">Date Created</label>
+                    <div class="d-flex">
+                        <input id="field_dateCreated" type="datetime-local" class="form-control" name="dateCreated" [(ngModel)]="dateCreated"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.dateCreated?.dirty && editForm.controls.dateCreated?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dateCreated?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.dateCreated?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="image.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tag">Tag</label>
+                    <input type="text" class="form-control" name="tag" id="field_tag"
+                        [(ngModel)]="image.tag" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-height: 100px;" *ngIf="image.image" alt="image image"/>
+                        <div *ngIf="image.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{image.imageContentType}}, {{byteSize(image.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, image, 'image', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="image.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="image.imageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_contact">Contact</label>
+                    <select class="form-control" id="field_contact" name="contact" [(ngModel)]="image.contact" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contactOption.id === image.contact?.id ? image.contact : contactOption" *ngFor="let contactOption of contacts; trackBy: trackContactById">{{contactOption.username}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_review">Review</label>
+                    <select class="form-control" id="field_review" name="review" [(ngModel)]="image.review" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="reviewOption.id === image.review?.id ? image.review : reviewOption" *ngFor="let reviewOption of reviews; trackBy: trackReviewById">{{reviewOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_service">Service</label>
+                    <select class="form-control" id="field_service" name="service" [(ngModel)]="image.service" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="serviceOption.id === image.service?.id ? image.service : serviceOption" *ngFor="let serviceOption of services; trackBy: trackServiceById">{{serviceOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_merchantAccount">Merchant Account</label>
+                    <select class="form-control" id="field_merchantAccount" name="merchantAccount" [(ngModel)]="image.merchantAccount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="merchantAccountOption.id === image.merchantAccount?.id ? image.merchantAccount : merchantAccountOption" *ngFor="let merchantAccountOption of merchantaccounts; trackBy: trackMerchantAccountById">{{merchantAccountOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resource">Resource</label>
+                    <select class="form-control" id="field_resource" name="resource" [(ngModel)]="image.resource" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="resourceOption.id === image.resource?.id ? image.resource : resourceOption" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

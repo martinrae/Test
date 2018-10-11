@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity MerchantAccount.
+    -->
+    <changeSet id="20181006070453-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="merchant_accounts_id"
+                                 baseTableName="merchant_account_account_category"
+                                 constraintName="fk_merchant_account_account_category_merchant_accounts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_account"/>
+        <addForeignKeyConstraint baseColumnNames="account_categories_id"
+                                 baseTableName="merchant_account_account_category"
+                                 constraintName="fk_merchant_account_account_category_account_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="account_category"/>
+        
+    </changeSet>
+</databaseChangeLog>

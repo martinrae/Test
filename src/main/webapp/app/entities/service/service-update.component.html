@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-service-heading">Create or edit a Service</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!service.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="service.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="service.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="service.description" required/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                        [(ngModel)]="service.price" required min="0" jhiMin="0"/>
+                    <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.price?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.price?.errors?.min">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.price?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileImage">Profile Image</label>
+                    <div>
+                        <img [src]="'data:' + service.profileImageContentType + ';base64,' + service.profileImage" style="max-height: 100px;" *ngIf="service.profileImage" alt="service image"/>
+                        <div *ngIf="service.profileImage" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{service.profileImageContentType}}, {{byteSize(service.profileImage)}}</span>
+                            <button type="button" (click)="clearInputImage('profileImage', 'profileImageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_profileImage" (change)="setFileData($event, service, 'profileImage', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="profileImage" id="field_profileImage"
+                        [(ngModel)]="service.profileImage" />
+                    <input type="hidden" class="form-control" name="profileImageContentType" id="field_profileImageContentType"
+                        [(ngModel)]="service.profileImageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label for="field_serviceCategory">Service Category</label>
+                    <select class="form-control" id="field_serviceCategory" multiple name="serviceCategory" [(ngModel)]="service.serviceCategories">
+                        <option [ngValue]="getSelected(service.serviceCategories, serviceCategoryOption)" *ngFor="let serviceCategoryOption of servicecategories; trackBy: trackServiceCategoryById">{{serviceCategoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_resource">Resource</label>
+                    <select class="form-control" id="field_resource" multiple name="resource" [(ngModel)]="service.resources">
+                        <option [ngValue]="getSelected(service.resources, resourceOption)" *ngFor="let resourceOption of resources; trackBy: trackResourceById">{{resourceOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_merchantAccount">Merchant Account</label>
+                    <select class="form-control" id="field_merchantAccount" name="merchantAccount" [(ngModel)]="service.merchantAccount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="merchantAccountOption.id === service.merchantAccount?.id ? service.merchantAccount : merchantAccountOption" *ngFor="let merchantAccountOption of merchantaccounts; trackBy: trackMerchantAccountById">{{merchantAccountOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_discount">Discount</label>
+                    <select class="form-control" id="field_discount" name="discount" [(ngModel)]="service.discount" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="discountOption.id === service.discount?.id ? service.discount : discountOption" *ngFor="let discountOption of discounts; trackBy: trackDiscountById">{{discountOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -16,6 +16,9 @@ import { YaldayAppRoutingModule } from './app-routing.module';
 import { YaldayHomeModule } from './home/home.module';
 import { YaldayAccountModule } from './account/account.module';
 import { YaldayEntityModule } from './entities/entity.module';
+import { YaldayMerchantAccountModule } from './entities/merchant-account/';
+import { YaldayMerchantSearchModule } from './search/merchant-search/';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 
@@ -28,7 +31,9 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         YaldayCoreModule,
         YaldayHomeModule,
         YaldayAccountModule,
-        YaldayEntityModule
+        YaldayEntityModule,
+        YaldayMerchantAccountModule,
+        YaldayMerchantSearchModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

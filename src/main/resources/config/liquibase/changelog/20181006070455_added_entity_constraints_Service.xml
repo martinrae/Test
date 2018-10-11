@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Service.
+    -->
+    <changeSet id="20181006070455-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="services_id"
+                                 baseTableName="service_service_category"
+                                 constraintName="fk_service_service_category_services_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+        <addForeignKeyConstraint baseColumnNames="service_categories_id"
+                                 baseTableName="service_service_category"
+                                 constraintName="fk_service_service_category_service_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="services_id"
+                                 baseTableName="service_resource"
+                                 constraintName="fk_service_resource_services_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service"/>
+        <addForeignKeyConstraint baseColumnNames="resources_id"
+                                 baseTableName="service_resource"
+                                 constraintName="fk_service_resource_resources_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="resource"/>
+        
+        <addForeignKeyConstraint baseColumnNames="merchant_account_id"
+                                 baseTableName="service"
+                                 constraintName="fk_service_merchant_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_account"/>
+
+        <addForeignKeyConstraint baseColumnNames="discount_id"
+                                 baseTableName="service"
+                                 constraintName="fk_service_discount_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="discount"/>
+
+    </changeSet>
+</databaseChangeLog>

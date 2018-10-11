@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Review.
+    -->
+    <changeSet id="20181006070500-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="reviews_id"
+                                 baseTableName="review_contact"
+                                 constraintName="fk_review_contact_reviews_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="review"/>
+        <addForeignKeyConstraint baseColumnNames="contacts_id"
+                                 baseTableName="review_contact"
+                                 constraintName="fk_review_contact_contacts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contact"/>
+        
+        <addForeignKeyConstraint baseColumnNames="reviews_id"
+                                 baseTableName="review_merchant_account"
+                                 constraintName="fk_review_merchant_account_reviews_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="review"/>
+        <addForeignKeyConstraint baseColumnNames="merchant_accounts_id"
+                                 baseTableName="review_merchant_account"
+                                 constraintName="fk_review_merchant_account_merchant_accounts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="merchant_account"/>
+        
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,64 @@
+{
+    "name": "Bill",
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "details",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "billStatus",
+            "fieldType": "BillStatus",
+            "fieldValues": "PAID,ISSUED,CANCELLED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "paymentMethod",
+            "fieldType": "PaymentMethod",
+            "fieldValues": "CREDIT_CARD,CASH_ON_DELIVERY",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "paymentAmount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "booking",
+            "otherEntityName": "booking",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "bill"
+        }
+    ],
+    "changelogDate": "20181006070459",
+    "entityTableName": "bill",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

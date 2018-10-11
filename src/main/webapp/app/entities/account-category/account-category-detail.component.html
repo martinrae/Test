@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accountCategory">
+            <h2><span>Account Category</span> {{accountCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{accountCategory.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{accountCategory.description}}</span>
+                </dd>
+                <dt><span>Profile Image</span></dt>
+                <dd>
+                    <div *ngIf="accountCategory.profileImage">
+                        <a (click)="openFile(accountCategory.profileImageContentType, accountCategory.profileImage)">
+                            <img [src]="'data:' + accountCategory.profileImageContentType + ';base64,' + accountCategory.profileImage" style="max-width: 100%;" alt="accountCategory image"/>
+                        </a>
+                        {{accountCategory.profileImageContentType}}, {{byteSize(accountCategory.profileImage)}}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/account-category', accountCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

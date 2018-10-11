@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="booking">
+            <h2><span>Booking</span> {{booking.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Placed Date</span></dt>
+                <dd>
+                    <span>{{booking.placedDate}}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{booking.status}}</span>
+                </dd>
+                <dt><span>Code</span></dt>
+                <dd>
+                    <span>{{booking.code}}</span>
+                </dd>
+                <dt><span>Start Time</span></dt>
+                <dd>
+                    <span>{{booking.startTime}}</span>
+                </dd>
+                <dt><span>End Time</span></dt>
+                <dd>
+                    <span>{{booking.endTime}}</span>
+                </dd>
+                <dt><span>Quantity</span></dt>
+                <dd>
+                    <span>{{booking.quantity}}</span>
+                </dd>
+                <dt><span>Bill</span></dt>
+                <dd>
+                    <div *ngIf="booking.bill">
+                        <a [routerLink]="['/bill', booking.bill?.id, 'view']">{{booking.bill?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/booking', booking.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

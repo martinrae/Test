@@ -1,0 +1,39 @@
+{
+    "name": "AccountCategory",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "profileImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "merchantAccount",
+            "otherEntityName": "merchantAccount",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "accountCategory"
+        }
+    ],
+    "changelogDate": "20181006070454",
+    "entityTableName": "account_category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

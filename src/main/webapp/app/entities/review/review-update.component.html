@@ -1,0 +1,101 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-review-heading">Create or edit a Review</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!review.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="review.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="review.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_rating">Rating</label>
+                    <input type="number" class="form-control" name="rating" id="field_rating"
+                        [(ngModel)]="review.rating" required/>
+                    <div [hidden]="!(editForm.controls.rating?.dirty && editForm.controls.rating?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.rating?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.rating?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="review.description" required/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_reviewDate">Review Date</label>
+                    <div class="d-flex">
+                        <input id="field_reviewDate" type="datetime-local" class="form-control" name="reviewDate" [(ngModel)]="reviewDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.reviewDate?.dirty && editForm.controls.reviewDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.reviewDate?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.reviewDate?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileImage">Profile Image</label>
+                    <div>
+                        <img [src]="'data:' + review.profileImageContentType + ';base64,' + review.profileImage" style="max-height: 100px;" *ngIf="review.profileImage" alt="review image"/>
+                        <div *ngIf="review.profileImage" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{review.profileImageContentType}}, {{byteSize(review.profileImage)}}</span>
+                            <button type="button" (click)="clearInputImage('profileImage', 'profileImageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_profileImage" (change)="setFileData($event, review, 'profileImage', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="profileImage" id="field_profileImage"
+                        [(ngModel)]="review.profileImage" />
+                    <input type="hidden" class="form-control" name="profileImageContentType" id="field_profileImageContentType"
+                        [(ngModel)]="review.profileImageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label for="field_contact">Contact</label>
+                    <select class="form-control" id="field_contact" multiple name="contact" [(ngModel)]="review.contacts">
+                        <option [ngValue]="getSelected(review.contacts, contactOption)" *ngFor="let contactOption of contacts; trackBy: trackContactById">{{contactOption.username}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_merchantAccount">Merchant Account</label>
+                    <select class="form-control" id="field_merchantAccount" multiple name="merchantAccount" [(ngModel)]="review.merchantAccounts">
+                        <option [ngValue]="getSelected(review.merchantAccounts, merchantAccountOption)" *ngFor="let merchantAccountOption of merchantaccounts; trackBy: trackMerchantAccountById">{{merchantAccountOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

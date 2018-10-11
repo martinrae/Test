@@ -1,0 +1,24 @@
+.merchantBox {
+    background-color: White;
+    width: 100%;
+    height: 100%;
+    margin: 1.5em;
+    box-shadow: 1px 1px 5px 1px #888888;
+}
+
+.merchantImage {
+    position: relative;
+    float: left;
+    width: 450px;
+    height: 300px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.merchantInfo {
+    background-color: white;
+    margin-left: 200px;
+    padding: 3px;
+    text-align: left;
+}

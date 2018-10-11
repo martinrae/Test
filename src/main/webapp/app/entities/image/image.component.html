@@ -1,0 +1,110 @@
+<div>
+    <h2 id="page-heading">
+        <span>Images</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-image" [routerLink]="['/image/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down" >
+            Create new Image
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="images">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Date Created</span></th>
+            <th><span>Description</span></th>
+            <th><span>Tag</span></th>
+            <th><span>Image</span></th>
+            <th><span>Contact</span></th>
+            <th><span>Review</span></th>
+            <th><span>Service</span></th>
+            <th><span>Merchant Account</span></th>
+            <th><span>Resource</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let image of images ;trackBy: trackId">
+                <td><a [routerLink]="['/image', image.id, 'view' ]">{{image.id}}</a></td>
+                <td>{{image.dateCreated | date:'medium'}}</td>
+                <td>{{image.description}}</td>
+                <td>{{image.tag}}</td>
+                <td>
+                    <a *ngIf="image.image" (click)="openFile(image.imageContentType, image.image)">
+                        <img [src]="'data:' + image.imageContentType + ';base64,' + image.image" style="max-height: 30px;" alt="image image"/>
+                    </a>
+                    <span *ngIf="image.image">{{image.imageContentType}}, {{byteSize(image.image)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="image.contact">
+                        <a [routerLink]="['../contact', image.contact?.id, 'view' ]" >{{image.contact?.username}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="image.review">
+                        <a [routerLink]="['../review', image.review?.id, 'view' ]" >{{image.review?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="image.service">
+                        <a [routerLink]="['../service', image.service?.id, 'view' ]" >{{image.service?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="image.merchantAccount">
+                        <a [routerLink]="['../merchant-account', image.merchantAccount?.id, 'view' ]" >{{image.merchantAccount?.name}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="image.resource">
+                        <a [routerLink]="['../resource', image.resource?.id, 'view' ]" >{{image.resource?.name}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/image', image.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/image', image.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'image/'+ image.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

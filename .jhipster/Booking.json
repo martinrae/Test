@@ -1,0 +1,74 @@
+{
+    "name": "Booking",
+    "fields": [
+        {
+            "fieldName": "placedDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "BookingStatus",
+            "fieldValues": "COMPLETED,UPCOMING,INPROGRESS,CANCELLED",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startTime",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endTime",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "bill",
+            "otherEntityName": "bill",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "booking"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "resource",
+            "otherEntityName": "resource",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "booking"
+        }
+    ],
+    "changelogDate": "20181006070458",
+    "entityTableName": "booking",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

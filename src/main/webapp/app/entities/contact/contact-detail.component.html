@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contact">
+            <h2><span>Contact</span> {{contact.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Username</span></dt>
+                <dd>
+                    <span>{{contact.username}}</span>
+                </dd>
+                <dt><span>First Name</span></dt>
+                <dd>
+                    <span>{{contact.firstName}}</span>
+                </dd>
+                <dt><span>Last Name</span></dt>
+                <dd>
+                    <span>{{contact.lastName}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{contact.email}}</span>
+                </dd>
+                <dt><span>Phone</span></dt>
+                <dd>
+                    <span>{{contact.phone}}</span>
+                </dd>
+                <dt><span>Address Line 1</span></dt>
+                <dd>
+                    <span>{{contact.addressLine1}}</span>
+                </dd>
+                <dt><span>Address Line 2</span></dt>
+                <dd>
+                    <span>{{contact.addressLine2}}</span>
+                </dd>
+                <dt><span>City</span></dt>
+                <dd>
+                    <span>{{contact.city}}</span>
+                </dd>
+                <dt><span>Country</span></dt>
+                <dd>
+                    <span>{{contact.country}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{contact.type}}</span>
+                </dd>
+                <dt><span>Profile Image</span></dt>
+                <dd>
+                    <div *ngIf="contact.profileImage">
+                        <a (click)="openFile(contact.profileImageContentType, contact.profileImage)">
+                            <img [src]="'data:' + contact.profileImageContentType + ';base64,' + contact.profileImage" style="max-width: 100%;" alt="contact image"/>
+                        </a>
+                        {{contact.profileImageContentType}}, {{byteSize(contact.profileImage)}}
+                    </div>
+                </dd>
+                <dt><span>Email Consent</span></dt>
+                <dd>
+                    <span>{{contact.emailConsent}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{contact.user?.login}}
+                </dd>
+                <dt><span>Merchant Account</span></dt>
+                <dd>
+                    <span *ngFor="let merchantAccount of contact.merchantAccounts; let last = last">
+                        <a [routerLink]="['/merchant-account', merchantAccount?.id, 'view' ]">{{merchantAccount.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contact', contact.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

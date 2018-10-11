@@ -1,0 +1,36 @@
+<div class="row">
+    <jhi-alert></jhi-alert>
+       <div class="col-md-4"></div>
+    	<div class="col-md-8">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-50">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="try Glasgow AND Italian">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="merchant-search">
+			<div class="row">	
+			<a *ngFor="let merchantAccount of merchantAccounts" [routerLink]="['/merchant-search', merchantAccount.id, 'view' ]" style="text-decoration:none;">
+			  <div class="merchantBox">	
+				<img class="merchantImage" [src]="'data:' + merchantAccount.profileImageContentType + ';base64,' + merchantAccount.profileImage" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">{{merchantAccount.name}}</h5>
+					<h6 style="color:#00C590; font-size:small;">{{merchantAccount.city}} - 0.1km from West End</h6>
+					<p style="font-family: arial; font-size:small;">{{merchantAccount.description}}</p>
+				</div>
+			  </div>
+			</a>			
+			</div>	
+		</div>
+	</div>
+</div>

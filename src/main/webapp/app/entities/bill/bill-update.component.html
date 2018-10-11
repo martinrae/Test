@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-bill-heading">Create or edit a Bill</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!bill.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="bill.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" [(ngModel)]="date"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.date?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_details">Details</label>
+                    <input type="text" class="form-control" name="details" id="field_details"
+                        [(ngModel)]="bill.details" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                        [(ngModel)]="bill.code" required/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.code?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_billStatus">Bill Status</label>
+                    <select class="form-control" name="billStatus" [(ngModel)]="bill.billStatus" id="field_billStatus"  required>
+                        <option value="PAID">PAID</option>
+                        <option value="ISSUED">ISSUED</option>
+                        <option value="CANCELLED">CANCELLED</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.billStatus?.dirty && editForm.controls.billStatus?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.billStatus?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_paymentMethod">Payment Method</label>
+                    <select class="form-control" name="paymentMethod" [(ngModel)]="bill.paymentMethod" id="field_paymentMethod"  required>
+                        <option value="CREDIT_CARD">CREDIT_CARD</option>
+                        <option value="CASH_ON_DELIVERY">CASH_ON_DELIVERY</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.paymentMethod?.dirty && editForm.controls.paymentMethod?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.paymentMethod?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_paymentAmount">Payment Amount</label>
+                    <input type="number" class="form-control" name="paymentAmount" id="field_paymentAmount"
+                        [(ngModel)]="bill.paymentAmount" required/>
+                    <div [hidden]="!(editForm.controls.paymentAmount?.dirty && editForm.controls.paymentAmount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.paymentAmount?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.paymentAmount?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

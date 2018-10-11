@@ -1,0 +1,66 @@
+{
+    "name": "Image",
+    "fields": [
+        {
+            "fieldName": "dateCreated",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tag",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "contact",
+            "otherEntityName": "contact",
+            "otherEntityField": "username"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "review",
+            "otherEntityName": "review",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "service",
+            "otherEntityName": "service",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "merchantAccount",
+            "otherEntityName": "merchantAccount",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "resource",
+            "otherEntityName": "resource",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20181006070501",
+    "entityTableName": "image",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

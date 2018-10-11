@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="merchantAccount">
+            <h2><span>Merchant Account</span> {{merchantAccount.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{merchantAccount.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{merchantAccount.description}}</span>
+                </dd>
+                <dt><span>Address Line 1</span></dt>
+                <dd>
+                    <span>{{merchantAccount.addressLine1}}</span>
+                </dd>
+                <dt><span>Address Line 2</span></dt>
+                <dd>
+                    <span>{{merchantAccount.addressLine2}}</span>
+                </dd>
+                <dt><span>City</span></dt>
+                <dd>
+                    <span>{{merchantAccount.city}}</span>
+                </dd>
+                <dt><span>Country</span></dt>
+                <dd>
+                    <span>{{merchantAccount.country}}</span>
+                </dd>
+                <dt><span>Profile Image</span></dt>
+                <dd>
+                    <div *ngIf="merchantAccount.profileImage">
+                        <a (click)="openFile(merchantAccount.profileImageContentType, merchantAccount.profileImage)">
+                            <img [src]="'data:' + merchantAccount.profileImageContentType + ';base64,' + merchantAccount.profileImage" style="max-width: 100%;" alt="merchantAccount image"/>
+                        </a>
+                        {{merchantAccount.profileImageContentType}}, {{byteSize(merchantAccount.profileImage)}}
+                    </div>
+                </dd>
+                <dt><span>Open Monday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openMonday}}</span>
+                </dd>
+                <dt><span>Open Tuesday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openTuesday}}</span>
+                </dd>
+                <dt><span>Open Wednesday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openWednesday}}</span>
+                </dd>
+                <dt><span>Open Thursday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openThursday}}</span>
+                </dd>
+                <dt><span>Open Friday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openFriday}}</span>
+                </dd>
+                <dt><span>Open Saturday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openSaturday}}</span>
+                </dd>
+                <dt><span>Open Sunday</span></dt>
+                <dd>
+                    <span>{{merchantAccount.openSunday}}</span>
+                </dd>
+                <dt><span>Account Category</span></dt>
+                <dd>
+                    <span *ngFor="let accountCategory of merchantAccount.accountCategories; let last = last">
+                        <a [routerLink]="['/account-category', accountCategory?.id, 'view' ]">{{accountCategory.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/merchant-account', merchantAccount.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

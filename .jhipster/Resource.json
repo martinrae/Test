@@ -1,0 +1,57 @@
+{
+    "name": "Resource",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "image",
+            "otherEntityName": "image",
+            "otherEntityRelationshipName": "resource"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "resource",
+            "relationshipName": "booking",
+            "otherEntityName": "booking",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "service",
+            "otherEntityName": "service",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "resource"
+        }
+    ],
+    "changelogDate": "20181006070457",
+    "entityTableName": "resource",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

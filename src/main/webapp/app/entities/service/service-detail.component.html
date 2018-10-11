@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="service">
+            <h2><span>Service</span> {{service.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{service.name}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{service.description}}</span>
+                </dd>
+                <dt><span>Price</span></dt>
+                <dd>
+                    <span>{{service.price}}</span>
+                </dd>
+                <dt><span>Profile Image</span></dt>
+                <dd>
+                    <div *ngIf="service.profileImage">
+                        <a (click)="openFile(service.profileImageContentType, service.profileImage)">
+                            <img [src]="'data:' + service.profileImageContentType + ';base64,' + service.profileImage" style="max-width: 100%;" alt="service image"/>
+                        </a>
+                        {{service.profileImageContentType}}, {{byteSize(service.profileImage)}}
+                    </div>
+                </dd>
+                <dt><span>Service Category</span></dt>
+                <dd>
+                    <span *ngFor="let serviceCategory of service.serviceCategories; let last = last">
+                        <a [routerLink]="['/service-category', serviceCategory?.id, 'view' ]">{{serviceCategory.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Resource</span></dt>
+                <dd>
+                    <span *ngFor="let resource of service.resources; let last = last">
+                        <a [routerLink]="['/resource', resource?.id, 'view' ]">{{resource.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span>Merchant Account</span></dt>
+                <dd>
+                    <div *ngIf="service.merchantAccount">
+                        <a [routerLink]="['/merchant-account', service.merchantAccount?.id, 'view']">{{service.merchantAccount?.name}}</a>
+                    </div>
+                </dd>
+                <dt><span>Discount</span></dt>
+                <dd>
+                    <div *ngIf="service.discount">
+                        <a [routerLink]="['/discount', service.discount?.id, 'view']">{{service.discount?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/service', service.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

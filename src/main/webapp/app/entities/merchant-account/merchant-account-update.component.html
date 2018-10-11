@@ -1,0 +1,185 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-merchant-account-heading">Create or edit a Merchant Account</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!merchantAccount.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="merchantAccount.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="merchantAccount.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="merchantAccount.description" required/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_addressLine1">Address Line 1</label>
+                    <input type="text" class="form-control" name="addressLine1" id="field_addressLine1"
+                        [(ngModel)]="merchantAccount.addressLine1" required/>
+                    <div [hidden]="!(editForm.controls.addressLine1?.dirty && editForm.controls.addressLine1?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.addressLine1?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_addressLine2">Address Line 2</label>
+                    <input type="text" class="form-control" name="addressLine2" id="field_addressLine2"
+                        [(ngModel)]="merchantAccount.addressLine2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                        [(ngModel)]="merchantAccount.city" required/>
+                    <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.city?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                        [(ngModel)]="merchantAccount.country" required/>
+                    <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.country?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_profileImage">Profile Image</label>
+                    <div>
+                        <img [src]="'data:' + merchantAccount.profileImageContentType + ';base64,' + merchantAccount.profileImage" style="max-height: 100px;" *ngIf="merchantAccount.profileImage" alt="merchantAccount image"/>
+                        <div *ngIf="merchantAccount.profileImage" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{merchantAccount.profileImageContentType}}, {{byteSize(merchantAccount.profileImage)}}</span>
+                            <button type="button" (click)="clearInputImage('profileImage', 'profileImageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_profileImage" (change)="setFileData($event, merchantAccount, 'profileImage', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="profileImage" id="field_profileImage"
+                        [(ngModel)]="merchantAccount.profileImage" />
+                    <input type="hidden" class="form-control" name="profileImageContentType" id="field_profileImageContentType"
+                        [(ngModel)]="merchantAccount.profileImageContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openMonday">Open Monday</label>
+                    <input type="checkbox" class="form-control" name="openMonday" id="field_openMonday"
+                        [(ngModel)]="merchantAccount.openMonday" />
+                    <div [hidden]="!(editForm.controls.openMonday?.dirty && editForm.controls.openMonday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openMonday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openTuesday">Open Tuesday</label>
+                    <input type="checkbox" class="form-control" name="openTuesday" id="field_openTuesday"
+                        [(ngModel)]="merchantAccount.openTuesday" />
+                    <div [hidden]="!(editForm.controls.openTuesday?.dirty && editForm.controls.openTuesday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openTuesday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openWednesday">Open Wednesday</label>
+                    <input type="checkbox" class="form-control" name="openWednesday" id="field_openWednesday"
+                        [(ngModel)]="merchantAccount.openWednesday" />
+                    <div [hidden]="!(editForm.controls.openWednesday?.dirty && editForm.controls.openWednesday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openWednesday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openThursday">Open Thursday</label>
+                    <input type="checkbox" class="form-control" name="openThursday" id="field_openThursday"
+                        [(ngModel)]="merchantAccount.openThursday" />
+                    <div [hidden]="!(editForm.controls.openThursday?.dirty && editForm.controls.openThursday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openThursday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openFriday">Open Friday</label>
+                    <input type="checkbox" class="form-control" name="openFriday" id="field_openFriday"
+                        [(ngModel)]="merchantAccount.openFriday" />
+                    <div [hidden]="!(editForm.controls.openFriday?.dirty && editForm.controls.openFriday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openFriday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openSaturday">Open Saturday</label>
+                    <input type="checkbox" class="form-control" name="openSaturday" id="field_openSaturday"
+                        [(ngModel)]="merchantAccount.openSaturday" />
+                    <div [hidden]="!(editForm.controls.openSaturday?.dirty && editForm.controls.openSaturday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openSaturday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_openSunday">Open Sunday</label>
+                    <input type="checkbox" class="form-control" name="openSunday" id="field_openSunday"
+                        [(ngModel)]="merchantAccount.openSunday" />
+                    <div [hidden]="!(editForm.controls.openSunday?.dirty && editForm.controls.openSunday?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.openSunday?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_accountCategory">Account Category</label>
+                    <select class="form-control" id="field_accountCategory" multiple name="accountCategory" [(ngModel)]="merchantAccount.accountCategories">
+                        <option [ngValue]="getSelected(merchantAccount.accountCategories, accountCategoryOption)" *ngFor="let accountCategoryOption of accountcategories; trackBy: trackAccountCategoryById">{{accountCategoryOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <jhi-bill></jhi-bill>
+</div>

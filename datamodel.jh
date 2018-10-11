@@ -1,0 +1,154 @@
+
+
+
+entity Contact {
+	username String required
+	firstName String required
+    lastName String required
+	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    phone String required
+    addressLine1 String required
+    addressLine2 String
+    city String required
+    country String required
+    type Type required
+    profileImage ImageBlob
+    emailConsent Boolean required
+}
+
+enum Type {
+	CUSTOMER, MERCHANT
+}
+
+entity MerchantAccount {
+	name String required
+    description String required
+	addressLine1 String required
+    addressLine2 String
+	city String required
+    country String required
+    profileImage ImageBlob
+    openMonday Boolean required
+    openTuesday Boolean required
+    openWednesday Boolean required
+    openThursday Boolean required
+    openFriday Boolean required
+    openSaturday Boolean required
+    openSunday Boolean required
+}
+
+entity AccountCategory {
+	name String required
+	description String
+    profileImage ImageBlob
+}
+
+entity Service
+{
+	name String required
+    description String required
+	price BigDecimal required min (0)
+	profileImage ImageBlob
+}
+
+entity ServiceCategory {
+	name String required
+    description String
+    profileImage ImageBlob
+}
+
+entity Resource {
+	name String required
+    description String
+    quantity Integer required min(0)
+}
+
+entity Booking {
+		placedDate Instant required
+        status BookingStatus required
+        code String required
+        startTime LocalDate required
+        endTime LocalDate required
+        quantity Integer required
+}
+
+enum BookingStatus {
+	COMPLETED, UPCOMING, INPROGRESS, CANCELLED
+}
+
+entity Bill {
+	date Instant required 
+	details String
+    code String required
+    billStatus BillStatus required
+	paymentMethod PaymentMethod required
+	paymentAmount BigDecimal required
+}
+	
+enum BillStatus {
+	PAID, ISSUED, CANCELLED
+}    
+
+enum PaymentMethod {
+	CREDIT_CARD, CASH_ON_DELIVERY
+}
+
+
+entity Review {
+	name String
+    rating Integer required
+    description String required
+	reviewDate Instant required
+	profileImage ImageBlob
+}
+
+entity Image {
+	dateCreated Instant required
+    description String 
+    tag String
+    image ImageBlob
+}
+
+entity Discount {
+	name String required
+	dateCreated Instant required
+    percentatge Float required
+	startDate LocalDate required
+    endDate LocalDate required
+}
+
+relationship OneToOne {
+	Contact{user(login) required} to User{contact(email)}
+    Booking{bill} to Bill{booking}
+}
+
+
+relationship ManyToMany {
+	Contact{merchantAccount(name)} to MerchantAccount{contact(email)}
+	MerchantAccount{accountCategory(name)} to AccountCategory{merchantAccount(name)}
+    Service{serviceCategory(name)} to ServiceCategory{service(name)}
+    Service{resource(name)} to Resource{service(name)}
+    Resource{booking} to Booking{resource(name)}
+    Review{contact(username)} to Contact{review(description)}
+	Review{merchantAccount(name)} to MerchantAccount{review}
+}
+
+
+relationship OneToMany {
+	MerchantAccount{service(name)} to Service{merchantAccount(name)}
+    Contact{image} to Image{contact(username)}
+    Review{image} to Image{review(name)}
+    Service{image} to Image{service(name)}
+    MerchantAccount{image} to Image{merchantAccount(name)}
+    Resource{image} to Image{resource(name)}
+    Discount{service(name)} to Service{Discount}
+}
+
+
+
+
+// Set pagination options
+paginate MerchantAccount, Contact with infinite-scroll
+paginate Review, Service, Resource, Discount with pagination
+
+

@@ -1,41 +1,164 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
+    <div class="col-md-4">
+        
     </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
+    <div class="col-md-8">
 
         <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account"
-                   > You are logged in as user "{{account.login}}". </span>
+            <div class="lead" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account"> Hey {{account.login}}, welcome back!</span>
+        		<p class="lead">Our simple aim at Yalday, is less work more play.</p>
             </div>
-
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
+            
+            
+             <div class="lead" *ngSwitchCase="false">
+                <span id="home-logged-message" *ngIf="account"> Hey {{account.login}}, welcome back!</span>
+        		<p class="lead">Our simple aim at Yalday is less <b style=color:grey;>work</b> more <b>play</b>.</p>
+        		<span> </span> If you have an account, then
+                <a class="alert-link" (click)="login()">sign in</a><span></span>. Alternatively, <a class="alert-link" routerLink="register">Register a new account.</a>
             </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="register">Register a new account</a>
-            </div>
+            	<h1 class="display-4">How will you <b>play</b> today?</h1>
         </div>
 
-        <p>
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener">follow @java_hipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener">GitHub</a>!
-        </p>
+			
+  
     </div>
 </div>
+
+<jhi-merchant-search></jhi-merchant-search>
+<br>
+<h4>Explore</h4>
+<div class="row">
+	<div class="col-md-12">
+		<div class="merchant-types">
+			<div class="row">
+		  	
+        		<div class="merchantBox">	
+					<img class="merchantImage" src="/content/images/restaurant.jpg" alt='image'>
+					<div class="merchantInfo">
+					  	<h5 style="color:#004159;">(Food)</h5>
+					</div>
+				</div>
+  
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/adventure.jpg" alt='image'>
+				<div class="merchantInfo">
+						<h5 style="color:#004159;">(Adventure)</h5>
+				</div>
+		</div>
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/tours.jpg" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">(Tours)</h5>
+				</div>
+		</div>
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/events.jpg" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">(Events)</h5>
+				</div>
+		</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+
+<br>
+<h4>Upcoming Events in Glasgow</h4>
+<div class="row">
+	<div class="col-md-12">
+		<div class="merchant-types">
+			<div class="row">
+		  	
+        		<div class="merchantBox">	
+					<img class="merchantImage" src="/content/images/restaurant.jpg" alt='image'>
+					<div class="merchantInfo">
+					  	<h5 style="color:#004159;">[Household]</h5>
+					</div>
+				</div>
+  
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/adventure.jpg" alt='image'>
+				<div class="merchantInfo">
+						<h5 style="color:#004159;">[Pets]</h5>
+				</div>
+		</div>
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/tours.jpg" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">[Deliveries]</h5>
+				</div>
+		</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+<h4>Special Offers in Glasgow</h4>
+<div class="row">
+	<div class="col-md-12">
+		<div class="merchant-types">
+			<div class="row">
+		  	
+        		<div class="merchantBox">	
+					<img class="merchantImage" src="/content/images/restaurant.jpg" alt='image'>
+					<div class="merchantInfo">
+					  	<h5 style="color:#004159;">[Household]</h5>
+					</div>
+				</div>
+  
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/adventure.jpg" alt='image'>
+				<div class="merchantInfo">
+						<h5 style="color:#004159;">[Pets]</h5>
+				</div>
+		</div>
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/tours.jpg" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">[Deliveries]</h5>
+				</div>
+		</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+
+
+<br>
+<h4>Free up some spare time by booking one of our many helpers.</h4>
+<div class="row">
+	<div class="col-md-12">
+		<div class="merchant-types">
+			<div class="row">
+		  	
+        		<div class="merchantBox">	
+					<img class="merchantImage" src="/content/images/restaurant.jpg" alt='image'>
+					<div class="merchantInfo">
+					  	<h5 style="color:#004159;">[Household]</h5>
+					</div>
+				</div>
+  
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/adventure.jpg" alt='image'>
+				<div class="merchantInfo">
+						<h5 style="color:#004159;">[Pets]</h5>
+				</div>
+		</div>
+        <div class="merchantBox">	
+				<img class="merchantImage" src="/content/images/tours.jpg" alt='image'>
+				<div class="merchantInfo">
+					<h5 style="color:#004159;">[Deliveries]</h5>
+				</div>
+		</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+
+
+
+

@@ -9,8 +9,8 @@
 .merchantImage {
     position: relative;
     float: left;
-    width: 450px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,6 +19,9 @@
 .merchantInfo {
     background-color: white;
     margin-left: 200px;
-    padding: 3px;
     text-align: left;
+}
+
+agm-map {
+    height: 400px;
 }

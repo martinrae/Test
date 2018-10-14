@@ -23,6 +23,7 @@ const ENTITY_STATES = [...serviceRoute, ...servicePopupRoute];
         ServiceDeleteDialogComponent,
         ServiceDeletePopupComponent
     ],
+    exports: [],
     entryComponents: [ServiceComponent, ServiceUpdateComponent, ServiceDeleteDialogComponent, ServiceDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

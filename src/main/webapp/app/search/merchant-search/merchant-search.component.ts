@@ -3,12 +3,14 @@ import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/ht
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { AgmCoreModule } from '@agm/core';
 
 import { IMerchantAccount } from 'app/shared/model/merchant-account.model';
 import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { MerchantSearchService } from './merchant-search.service';
+import { MerchantSearchServicesComponent } from './merchant-search-services/merchant-search-services.component';
 
 import { ImageComponent } from 'app/entities/image';
 
@@ -29,6 +31,8 @@ export class MerchantSearchComponent implements OnInit, OnDestroy {
     reverse: any;
     totalItems: number;
     currentSearch: string;
+    longitude;
+    latitude;
 
     constructor(
         private merchantSearchService: MerchantSearchService,
@@ -123,6 +127,8 @@ export class MerchantSearchComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
+        this.longitude = -4.2941187; // change to merchants
+        this.latitude = 55.8747511; // change to merchants
         this.registerChangeInMerchantSearch();
     }
 

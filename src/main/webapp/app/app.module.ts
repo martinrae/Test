@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2Webstorage, LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
+import { AgmCoreModule } from '@agm/core';
 
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
@@ -33,7 +34,10 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         YaldayAccountModule,
         YaldayEntityModule,
         YaldayMerchantAccountModule,
-        YaldayMerchantSearchModule
+        YaldayMerchantSearchModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAuzD8ApARFFgqqk5TD5laCAw6PnjDMxbw'
+        })
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],

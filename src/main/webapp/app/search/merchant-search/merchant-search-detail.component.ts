@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
+import { AgmCoreModule } from '@agm/core';
+import { MerchantSearchServicesModule } from './merchant-search-services/merchant-search-services.module';
 
 import { IMerchantAccount } from 'app/shared/model/merchant-account.model';
 
@@ -11,17 +13,18 @@ import { IMerchantAccount } from 'app/shared/model/merchant-account.model';
 })
 export class MerchantSearchDetailComponent implements OnInit {
     merchantAccount: IMerchantAccount;
+    longitude;
+    latitude;
 
     constructor(private dataUtils: JhiDataUtils, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ merchantAccount }) => {
             this.merchantAccount = merchantAccount;
+            console.log(this.merchantAccount);
+            this.longitude = -4.2941187; // change to merchants
+            this.latitude = 55.8747511; // change to merchants
         });
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
     }
 
     openFile(contentType, field) {

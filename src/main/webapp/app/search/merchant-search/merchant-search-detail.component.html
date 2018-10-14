@@ -1,16 +1,19 @@
 <div class="row justify-content-center">
     <div class="col-8">
-            <h2><span>{{merchantAccount.name}}, {{merchantAccount.city}}</span></h2>
+            <h2><span>{{merchantAccount.name}}, {{merchantAccount.addressLine1}}, {{merchantAccount.city}}</span></h2>
             <hr>
     	<div class="row">
     		<div class="merchantBox">
 				<img class="merchantImage" [src]="'data:' + merchantAccount.profileImageContentType + ';base64,' + merchantAccount.profileImage" alt='image'>
 				<div class="merchantInfo">
-					
+					<agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="15">
+						<agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    				</agm-map>
 				</div>
     		</div>    	
     	</div>
-    
+    	
+
         <div *ngIf="merchantAccount">
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -18,12 +21,7 @@
                 <dd>
                     <span>{{merchantAccount.description}}</span>
                 </dd>
-                <dt><span>Address</span></dt>
-                <dd>
-                    <span>{{merchantAccount.addressLine1}}</span>
-                    <br><span>{{merchantAccount.city}}</span>
-                    <br><span>{{merchantAccount.country}}</span>
-                </dd>    
+        
                 <dt><span>Account Category</span></dt>
                 <dd>
                     <span *ngFor="let accountCategory of merchantAccount.accountCategories; let last = last">
@@ -44,5 +42,12 @@
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>
         </div>
+       
     </div>
+
+    
 </div>
+
+<jhi-merchant-search-services></jhi-merchant-search-services>
+
+
